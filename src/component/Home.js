@@ -88,7 +88,7 @@ console.log(11, env.base_url)
               return (
                 <>
                 <div className="col-md-4" style={{ marginBottom: '30px', padding: '10px' }}>
-                  <Link to={`/menu/${data.id}`}>
+                  <Link to={`/sub_catagory/${data.id}`}>
                     <div className="card">
                       <img src={"http://localhost:4000/catagory/"+ data.catagory_img} />
                       <div className="product_name">{data.name}</div>
