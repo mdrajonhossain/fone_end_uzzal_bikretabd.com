@@ -113,7 +113,7 @@ function Menu({ match }) {
       </div>
 
       <div className="product_header text-warning">
-      {productcard.length === 0 ? "Data Empty" : "All Subcatagory"}
+      {productcard.length === 0 ? <div className="empty_data">Data Empty</div> : "All Subcatagory"}
       </div>
 
       {productcard.length === 0 ? "" : <hr/>}
@@ -126,7 +126,6 @@ function Menu({ match }) {
           {productcard.map((productcartdata) => {
             return (
               <>
-
               <div className="col text-light" data-aos="zoom-in">              
                 <div className="card" key="unique" style={{backgroundColor:"#586e8d"}}>
                   <img src={"http://screete.bikretabd.com/subcatagory/"+productcartdata.sub_catagory_img} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />

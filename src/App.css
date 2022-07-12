@@ -358,3 +358,9 @@ body{
   width: 20px;
   height: 20px;
 }
+
+.empty_data{
+  font-size: 20px;
+  color: red;
+  padding: 50px;
+}
