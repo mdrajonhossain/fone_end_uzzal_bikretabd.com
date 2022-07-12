@@ -13,6 +13,7 @@ import env from "react-dotenv";
 
 function Home() {
   const [catagorey, setCatagorey] = useState([]);
+  const [all_product_tab, setAll_product_tab] = useState(true);
 
   useEffect(() => {
     AOS.init({ duration: 1000 })   
@@ -69,7 +70,7 @@ function Home() {
 
           <div className="row delivary">
             <div className="col-md-6">
-              <Link to="/menu"><button type="button" class="btn delivarybtn btn-lg btn-block">DELIVERY</button></Link>
+              <Link to="/menu"><button type="button" class="btn delivarybtn btn-lg btn-block">SHOP</button></Link>
             </div>
             
             <div className="col-md-6">
@@ -104,6 +105,14 @@ function Home() {
 
         </div>
       </div>
+
+{all_product_tab ? 
+      <div className="homepage_all_product">
+      <div className="header_home">All Product Selection Header</div>
+      <div className="header_exit" onClick={() => setAll_product_tab(!all_product_tab)}>&times;</div>
+      </div>
+: ""}
+
       <Fooder />
     </>
   );

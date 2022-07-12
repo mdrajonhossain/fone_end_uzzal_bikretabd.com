@@ -22,7 +22,7 @@ function Navber() {
         <div className="nav-container">
           <div className="nav-logo">            
             <span><Link to="/" className="nav-links">            
-            Bikreta bd
+            বিক্রেতা বিডি . কম
             </Link></span>
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
