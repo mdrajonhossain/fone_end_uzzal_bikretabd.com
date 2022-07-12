@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     AOS.init({ duration: 1000 })   
 
-    axios.get(env.base_url+'/admin/cata_get_client')
+    axios.get('http://screete.bikretabd.com/admin/cata_get_client')
         .then(response => {
           console.log(response.data.cat_data);
           setCatagorey(response.data.cat_data)
@@ -29,7 +29,7 @@ function Home() {
       
     
 
-console.log(11, env.base_url)
+
 
   return (
     <>
@@ -90,7 +90,7 @@ console.log(11, env.base_url)
                 <div className="col-md-4" style={{ marginBottom: '30px', padding: '10px' }}>
                   <Link to={`/sub_catagory/${data.id}`}>
                     <div className="card">
-                      <img src={"http://localhost:4000/catagory/"+ data.catagory_img} />
+                      <img src={"http://screete.bikretabd.com/catagory/"+ data.catagory_img} />
                       <div className="product_name">{data.name}</div>
                     </div>
                   </Link>

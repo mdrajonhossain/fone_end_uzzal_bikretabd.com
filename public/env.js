@@ -3,7 +3,7 @@ window.env = {
   "ALLUSERSPROFILE": "C:\\ProgramData",
   "ANDROID_HOME": "C:\\Users\\rajon\\AppData\\Local\\Android\\Sdk",
   "APPDATA": "C:\\Users\\rajon\\AppData\\Roaming",
-  "base_url": "http://localhost:4000",
+  "base_url": "http://screete.bikretabd.com/",
   "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
   "ChocolateyLastPathUpdate": "132918398340750864",
   "COLOR": "0",

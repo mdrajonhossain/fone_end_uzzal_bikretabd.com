@@ -54,23 +54,26 @@ function Menu({ match }) {
   // console.log(match.params.id)
 
   
-    const datashowing = async () => {
-      const requestOptions = {
+   
+ 
+ useEffect(() => {   
+ 
+  try {    
+     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: match.params.id })        
     };
-    fetch(env.base_url + '/admin/sub_cata_sub_id_client', requestOptions)
+    fetch('http://screete.bikretabd.com/admin/sub_cata_sub_id_client', requestOptions)
         .then(response => response.json())
         .then(data => {
             console.log(data.sub_id);
             setProductcard(data.sub_id)
           });
   }
- 
- useEffect(() => {    
-    console.log(match.params.id);
-    datashowing();   
+  catch(err) {
+      console.log(err);
+  }
   },[]);
 
  
@@ -109,8 +112,13 @@ function Menu({ match }) {
         </button>
       </div>
 
-      <div className="product_header text-warning">All Subcatagory</div>
-      <hr/>
+      <div className="product_header text-warning">
+      {productcard.length === 0 ? "Data Empty" : "All Subcatagory"}
+      </div>
+
+      {productcard.length === 0 ? "" : <hr/>}
+      
+      
 
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -118,9 +126,10 @@ function Menu({ match }) {
           {productcard.map((productcartdata) => {
             return (
               <>
+
               <div className="col text-light" data-aos="zoom-in">              
                 <div className="card" key="unique" style={{backgroundColor:"#586e8d"}}>
-                  <img src={"http://localhost:4000/subcatagory/"+productcartdata.sub_catagory_img} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
+                  <img src={"http://screete.bikretabd.com/subcatagory/"+productcartdata.sub_catagory_img} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
                   <div className="card-body">
                     <h6 className="card-title">{productcartdata.name}</h6>                    
                   </div>
