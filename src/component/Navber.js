@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 
 
 function Navber() {
-	 const [click, setClick] = React.useState(false);
+  const [click, setClick] = React.useState(false);
+  const [catagorylist, setCatagorylist] = React.useState(false);
 
   const handleClick = () => setClick(!click);
   const Close = () => setClick(false);
@@ -17,25 +18,39 @@ function Navber() {
 
   return (
     <>
-     <div className="main-container"  onClick={()=>Close()} />
+      <div className="main-container" onClick={() => Close()} />
       <nav className="navbar" onClick={e => e.stopPropagation()}>
         <div className="nav-container">
-          <div className="nav-logo">            
-            <span><Link to="/" className="nav-links">            
-            বিক্রেতা বিডি . কম
+          <div className="nav-logo">
+            <span><Link to="/" className="nav-links">
+              বিক্রেতা বিডি . কম
             </Link></span>
+            <div className='home_header_toggle' onClick={()=>setCatagorylist(!catagorylist)}>^</div>
+            {catagorylist ?
+              <div className='home_catagory_list'>
+                <ul>
+                  <li>sadfasdf</li>
+                  <li>sadfasdf</li>
+                  <li>sadfasdf</li>
+                  <li>sadfasdf</li>
+                  <li>sadfasdf</li>
+                  <li>sadfasdf</li>
+                  <li>Catagory List</li>
+                </ul>
+              </div>
+              : ""}
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
             <li className="nav-item">
-              <span><Link to="/" className="nav-links">Home</Link></span>              
-            </li>
-            <li className="nav-item">              
-                <span><Link to="/" className="nav-links">Sign In</Link></span>
+              <span><Link to="/" className="nav-links">Home</Link></span>
             </li>
             <li className="nav-item">
-              <span><Link to="/" className="nav-links" style={{position:'relative'}}>
-              Shop 
-              <span className="card_counter">5</span></Link></span>
+              <span><Link to="/" className="nav-links">Sign In</Link></span>
+            </li>
+            <li className="nav-item">
+              <span><Link to="/" className="nav-links" style={{ position: 'relative' }}>
+                Shop
+                <span className="card_counter">5</span></Link></span>
             </li>
           </ul>
           <div className="nav-icon" onClick={handleClick}>

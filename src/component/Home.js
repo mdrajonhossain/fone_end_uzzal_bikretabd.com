@@ -13,7 +13,7 @@ import env from "react-dotenv";
 
 function Home() {
   const [catagorey, setCatagorey] = useState([]);
-  const [all_product_tab, setAll_product_tab] = useState(true);
+  const [all_product_tab, setAll_product_tab] = useState(false);
 
   useEffect(() => {
     AOS.init({ duration: 1000 })   

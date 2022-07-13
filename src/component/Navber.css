@@ -50,6 +50,7 @@
   text-decoration: none;
   font-size: 20px;
   flex-grow: 1;
+  position: relative;
 }
 
 .nav-menu {
@@ -175,3 +176,31 @@ a:hover{
   color: #bfa215;
 }
 
+
+.home_header_toggle {
+  width: 15%;
+  font-size: 15px;
+  color: white;
+  position: fixed;
+  background-color: #002c20;  
+  text-align: center;
+  margin-top: 17px;
+}
+
+.home_catagory_list {
+  font-size: 16px;
+  background-color: #006a50;
+  position: fixed;
+  line-height: 40px;  
+  width: 15%;
+  top: 103px;
+}
+
+.home_catagory_list li:hover{
+  background-color: #6a545461;
+  color: white;  
+}
+
+.home_catagory_list li{
+  list-style: none;
+}
