@@ -45,7 +45,7 @@ function Navber() {
               <span><Link to="/" className="nav-links">Home</Link></span>
             </li>
             <li className="nav-item">
-              <span><Link to="/" className="nav-links">Sign In</Link></span>
+              <span><Link to="/items" className="nav-links">Sign In</Link></span>
             </li>
             <li className="nav-item">
               <span><Link to="/" className="nav-links" style={{ position: 'relative' }}>
