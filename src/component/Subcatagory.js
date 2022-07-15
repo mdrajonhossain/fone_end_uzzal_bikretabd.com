@@ -1,55 +1,21 @@
 import '../App.css';
 import Fooder from './Fooder';
-import Menubar from './Menubar';
 import Navber from './Navber';
 import 'aos';
 import AOS from 'aos';
 import React, { useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import env from "react-dotenv";
 import { Link } from "react-router-dom";
 
 
-function Menu({ match }) {
+function Subcatagory({ match }) {
   const [productcard, setProductcard] = useState([]);
 
   useEffect(() => {
     AOS.init({ duration: 1000 })
   });
 
-  var a = 1;
-  const addtocardmethod = (e) => {
-    console.log("image:", e.id)
-    console.log("image:", e.thumbnail_image)
-    console.log("name:", e.name)
-    console.log("id:", e.id)
-    console.log("price", e.price_stock_chart[0].s_p)
-
-    var addtocart = JSON.parse(localStorage.getItem("addtocart") || "[]");
-
-    if (addtocart.length === 0) {
-      var addtocart = JSON.parse(localStorage.getItem("addtocart") || "[]");
-      addtocart.push({ id: e.id, img: e.thumbnail_image, product_name: e.name, price: e.price_stock_chart[0].s_p, qunt: 1 });
-      localStorage.setItem("addtocart", JSON.stringify(addtocart));
-    } else {
-      var mach = addtocart.filter((dt) => {
-        return dt.product_name.match(e.name)
-      })
-      if (mach.length === 0) {
-        var addtocart = JSON.parse(localStorage.getItem("addtocart") || "[]");
-        addtocart.push({ id: e.id, img: e.thumbnail_image, product_name: e.name, price: e.price_stock_chart[0].s_p, qunt: 1 });
-        localStorage.setItem("addtocart", JSON.stringify(addtocart));
-        toast("New Product Add to Cart")
-      } else {
-        var addtocart = JSON.parse(localStorage.getItem("addtocart") || "[]");
-        var index = addtocart.findIndex(x => x.product_name === e.name);
-        addtocart[index].qunt = addtocart[index].qunt + 1;
-        localStorage.setItem("addtocart", JSON.stringify(addtocart));
-        toast("Update Product Add to Cart")
-      }
-    }
-  }
 
 
 
@@ -127,8 +93,8 @@ function Menu({ match }) {
                     <Link to={`/products/${productcartdata.category_id}`}>
                       <div className="card" key="unique" style={{ backgroundColor: "#586e8d" }}>
                         <img src={"http://screete.bikretabd.com/subcatagory/" + productcartdata.sub_catagory_img} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
-                        <div className="card-body">
-                          <h6 className="card-title">{productcartdata.name}</h6>
+                        <div className="card-body text-light">
+                          <span className="card-title">{productcartdata.name}</span>
                         </div>
                       </div>
                     </Link>
@@ -141,17 +107,6 @@ function Menu({ match }) {
         </div>
 
 
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
 
 
 
@@ -161,4 +116,4 @@ function Menu({ match }) {
   );
 }
 
-export default Menu;
+export default Subcatagory;

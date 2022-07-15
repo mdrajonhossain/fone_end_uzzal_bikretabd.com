@@ -56,14 +56,23 @@ function Items({ match }) {
           {product_data.map((data) => {
             return (
               <>
-                <div className="col-md-4 text-light" data-aos="zoom-in">
+                <div className="col-md-4 main_items" data-aos="zoom-in">
                   <div className="card" key="unique" style={{ backgroundColor: "#586e8d" }}>
-                    <img src={"http://screete.bikretabd.com/items_image_file/" + data.fontimg} class="card-img-top"  data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
-                    <div className="card-body">
+                    <img src={"http://screete.bikretabd.com/items_image_file/" + data.fontimg} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
+                    <div className="card-body text-light">
                       <h6 className="card-title">{data.item_name}</h6>
+                      <h6 className="card-title">Price : Tk {data.regular_price} </h6>
                     </div>
                   </div>
-                </div>
+                  <div className='adding_card'>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-dark">-</button>
+                      <button type="button" class="btn text-light">10</button>
+                      <button type="button" class="btn btn-dark">+</button>
+                    </div>
+                  </div>
+                </div> &nbsp;
+
               </>
             )
           })}
@@ -72,7 +81,7 @@ function Items({ match }) {
 
 
 
-        
+
       </div>
 
       <Fooder />

@@ -6,7 +6,7 @@ import 'aos';
 import AOS from 'aos';
 import { Link } from "react-router-dom";
 import axios from "axios";
-import env from "react-dotenv";
+
 
 
 
@@ -74,7 +74,7 @@ function Home() {
             </div>
             
             <div className="col-md-6">
-              <button type="button" className="btn delivarybtn btn-lg btn-block">DINE-IN</button>
+              <button type="button" className="btn delivarybtn btn-lg btn-block">OFFER</button>
             </div>
           </div>
         </div>
