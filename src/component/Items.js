@@ -13,6 +13,7 @@ import env from "react-dotenv";
 
 function Items({ match }) {
   const [product_data, setProduct_data] = useState([]);
+  const [locata, setLocata] = useState([]);
 
 
   useEffect(() => {
@@ -21,6 +22,23 @@ function Items({ match }) {
 
 
   useEffect(() => {
+
+    setInterval(function () {
+      var addcard = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+      setLocata(addcard);
+    }, 100);
+
+
+    locata.map((ss)=>{
+      console.log(55, ss.item_name);
+    })
+
+
+
+
+
+
+
 
     var id = match.params.id;
     try {
@@ -44,6 +62,68 @@ function Items({ match }) {
 
 
 
+  const addtocards = (e) => {
+    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+    addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
+    localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
+  }
+
+
+
+
+  var a = 1;
+  const increment = (e) => {
+    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+
+    if (addcard_items.length === 0) {
+      var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+      addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
+      localStorage.setItem("users", JSON.stringify(addcard_items));
+    } else {
+      var mach = addcard_items.filter((dt) => {
+        return dt.item_name.match(e.item_name)
+      })
+      if (mach.length === 0) {
+        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+        addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
+        localStorage.setItem("users", JSON.stringify(addcard_items));
+      } else {
+        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+        var index = addcard_items.findIndex(x => x.item_name === e.item_name);
+        addcard_items[index].qnt = addcard_items[index].qnt + 1;
+        localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
+      }
+    }
+  }
+
+
+  var a = 1;
+  const derement = (e) => {
+    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+
+    if (addcard_items.length === 0) {
+      var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+      addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
+      localStorage.setItem("users", JSON.stringify(addcard_items));
+    } else {
+      var mach = addcard_items.filter((dt) => {
+        return dt.item_name.match(e.item_name)
+      })
+      if (mach.length === 0) {
+        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+        addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
+        localStorage.setItem("users", JSON.stringify(addcard_items));
+      } else {
+        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
+        var index = addcard_items.findIndex(x => x.item_name === e.item_name);
+        addcard_items[index].qnt = addcard_items[index].qnt - 1;
+        localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
+      }
+    }
+  }
+
+
+
 
 
   return (
@@ -53,10 +133,10 @@ function Items({ match }) {
       <div className="container">
 
         <div className="row">
-          {product_data.map((data) => {
+          {product_data.map((data, index) => {
             return (
               <>
-                <div className="col-md-4 main_items" data-aos="zoom-in">
+                <div className="col-md-3 main_items" data-aos="zoom-in">
                   <div className="card" key="unique" style={{ backgroundColor: "#586e8d" }}>
                     <img src={"http://screete.bikretabd.com/items_image_file/" + data.fontimg} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
                     <div className="card-body text-light">
@@ -65,17 +145,41 @@ function Items({ match }) {
                     </div>
                   </div>
                   <div className='adding_card'>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-dark">-</button>
-                      <button type="button" class="btn text-light">10</button>
-                      <button type="button" class="btn btn-dark">+</button>
-                    </div>
+
+                    {
+                      locata.length != 0 ?
+                        locata.map((local_data) => {
+                          return (
+                            <>
+                              {local_data.item_id === data.id ?
+                                <div style={{ marginTop: '50%', paddingLeft: '25%' }}>
+                                  <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-dark" onClick={() => derement(data)}>-</button>
+                                    <button type="button" class="btn text-light">10</button>
+                                    <button type="button" class="btn btn-dark" onClick={() => increment(data)}>+</button>
+                                  </div>
+                                </div>
+                                :
+                                <div onClick={() => addtocards(data)} style={{ background: '#006a50', cursor: 'pointer', marginTop: '50%', color: 'white', padding: '15px', textAlign: 'center' }}>
+                                  Add to Card</div>
+                              }
+                            </>
+                          )
+                        })
+                        :
+                        <div onClick={() => addtocards(data)} style={{ background: '#006a50', cursor: 'pointer', marginTop: '50%', color: 'white', padding: '15px', textAlign: 'center' }}>
+                          Add to Card</div>
+                    }
+
+
                   </div>
                 </div> &nbsp;
 
               </>
             )
           })}
+
+
 
         </div>
 

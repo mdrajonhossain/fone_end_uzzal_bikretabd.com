@@ -401,9 +401,7 @@ body{
 
 .adding_card{
   position: absolute;  
-  background-color: rgba(0, 128, 0, 0.425);
-  width: 355px;
+  width: 260px;
   height: 300px;  
-  top: 0px;
-  padding: 120px 0px 0px 120px;
+  top: 0px;   
 }
