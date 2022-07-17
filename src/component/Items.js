@@ -14,6 +14,8 @@ import env from "react-dotenv";
 function Items({ match }) {
   const [product_data, setProduct_data] = useState([]);
   const [locata, setLocata] = useState([]);
+  const [productcount, setProductcount] = useState(5);
+
 
 
   useEffect(() => {
@@ -23,18 +25,12 @@ function Items({ match }) {
 
   useEffect(() => {
 
+
+
     setInterval(function () {
-      var addcard = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-      setLocata(addcard);
+      var item = JSON.parse(localStorage.getItem("item") || "[]");
+      setLocata(item);
     }, 100);
-
-
-    locata.map((ss)=>{
-      console.log(55, ss.item_name);
-    })
-
-
-
 
 
 
@@ -62,63 +58,67 @@ function Items({ match }) {
 
 
 
+
+
   const addtocards = (e) => {
-    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-    addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-    localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
-  }
 
+    var id = e.id;
+    var item_name = e.item_name;
+    var api_photo = e.fontimg;
+    var price = e.regular_price;
 
+    var a = 1;
+    var item = JSON.parse(localStorage.getItem("item") || "[]");
 
-
-  var a = 1;
-  const increment = (e) => {
-    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-
-    if (addcard_items.length === 0) {
-      var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-      addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-      localStorage.setItem("users", JSON.stringify(addcard_items));
+    if (item.length === 0) {
+      var item = JSON.parse(localStorage.getItem("item") || "[]");
+      item.push({ id: id, item_name: item_name, api_photo: api_photo, qnt: a, price: price });
+      localStorage.setItem("item", JSON.stringify(item));
     } else {
-      var mach = addcard_items.filter((dt) => {
-        return dt.item_name.match(e.item_name)
+      var mach = item.filter((dt) => {
+        return dt.item_name.match(item_name)
       })
       if (mach.length === 0) {
-        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-        addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-        localStorage.setItem("users", JSON.stringify(addcard_items));
+        var item = JSON.parse(localStorage.getItem("item") || "[]");
+        item.push({ id: id, item_name: item_name, api_photo: api_photo, qnt: a, price: price });
+        localStorage.setItem("item", JSON.stringify(item));
       } else {
-        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-        var index = addcard_items.findIndex(x => x.item_name === e.item_name);
-        addcard_items[index].qnt = addcard_items[index].qnt + 1;
-        localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
+        var item = JSON.parse(localStorage.getItem("item") || "[]");
+        var index = item.findIndex(x => x.item_name === item_name);
+        if (item[index].qnt != 10) {
+          item[index].qnt = item[index].qnt + 1;
+          localStorage.setItem("item", JSON.stringify(item));
+        }
       }
     }
   }
 
 
-  var a = 1;
-  const derement = (e) => {
-    var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
 
-    if (addcard_items.length === 0) {
-      var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-      addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-      localStorage.setItem("users", JSON.stringify(addcard_items));
+
+  const increment = (e) => {
+    console.log(e);
+
+    var item = JSON.parse(localStorage.getItem("item") || "[]");
+    var index = item.findIndex(x => x.id === e);
+    if (item[index].qnt != 10) {
+      item[index].qnt = item[index].qnt + 1;
+      localStorage.setItem("item", JSON.stringify(item));
+    }
+  }
+
+
+  const derement = (e) => {
+    var item = JSON.parse(localStorage.getItem("item") || "[]");
+    var index = item.findIndex(x => x.id === e);
+    if (item[index].qnt > 1) {
+      item[index].qnt = item[index].qnt - 1;
+      localStorage.setItem("item", JSON.stringify(item));
     } else {
-      var mach = addcard_items.filter((dt) => {
-        return dt.item_name.match(e.item_name)
-      })
-      if (mach.length === 0) {
-        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-        addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-        localStorage.setItem("users", JSON.stringify(addcard_items));
-      } else {
-        var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
-        var index = addcard_items.findIndex(x => x.item_name === e.item_name);
-        addcard_items[index].qnt = addcard_items[index].qnt - 1;
-        localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
-      }
+      const item = JSON.parse(localStorage.getItem("item"));
+      var index = item.findIndex(x => x.id === e);
+      item.splice(index, 1);
+      localStorage.setItem('item', JSON.stringify(item));
     }
   }
 
@@ -136,50 +136,39 @@ function Items({ match }) {
           {product_data.map((data, index) => {
             return (
               <>
-                <div className="col-md-3 main_items" data-aos="zoom-in">
+                <div className="col-md-3 main_items" data-aos="zoom-in" key="{data}">
                   <div className="card" key="unique" style={{ backgroundColor: "#586e8d" }}>
                     <img src={"http://screete.bikretabd.com/items_image_file/" + data.fontimg} class="card-img-top" data-aos="flip-right" alt="..." style={{ height: '287px', width: '92%', height: '287px', margin: '0 auto', marginTop: '10px' }} />
-                    <div className="card-body text-light">
+                    <div className="card-body text-light" onClick={() => addtocards(data)} style={{ cursor: 'pointer' }}>
                       <h6 className="card-title">{data.item_name}</h6>
                       <h6 className="card-title">Price : Tk {data.regular_price} </h6>
                     </div>
                   </div>
-                  <div className='adding_card'>
 
-                    {
-                      locata.length != 0 ?
-                        locata.map((local_data) => {
-                          return (
-                            <>
-                              {local_data.item_id === data.id ?
-                                <div style={{ marginTop: '50%', paddingLeft: '25%' }}>
-                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-dark" onClick={() => derement(data)}>-</button>
-                                    <button type="button" class="btn text-light">10</button>
-                                    <button type="button" class="btn btn-dark" onClick={() => increment(data)}>+</button>
-                                  </div>
+                  {locata.map((local, i) => {
+                    return (
+                      <>
+                        <div className='adding_card' key="{local}">
+                          {
+                            local.id === data.id ?
+                              <div style={{ marginTop: '50%', paddingLeft: '25%' }}>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                  <button type="button" class="btn btn-dark" onClick={() => derement(local.id)}>-</button>
+                                  <button type="button" class="btn text-light">{local.qnt}</button>
+                                  <button type="button" class="btn btn-dark" onClick={() => increment(local.id)}>+</button>
                                 </div>
-                                :
-                                <div onClick={() => addtocards(data)} style={{ background: '#006a50', cursor: 'pointer', marginTop: '50%', color: 'white', padding: '15px', textAlign: 'center' }}>
-                                  Add to Card</div>
-                              }
-                            </>
-                          )
-                        })
-                        :
-                        <div onClick={() => addtocards(data)} style={{ background: '#006a50', cursor: 'pointer', marginTop: '50%', color: 'white', padding: '15px', textAlign: 'center' }}>
-                          Add to Card</div>
-                    }
-
-
-                  </div>
+                              </div>
+                              : ""
+                          }
+                        </div>
+                      </>
+                    )
+                  })
+                  }
                 </div> &nbsp;
-
               </>
             )
           })}
-
-
 
         </div>
 
