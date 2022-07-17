@@ -78,7 +78,7 @@ function Items({ match }) {
     if (addcard_items.length === 0) {
       var addcard_items = JSON.parse(localStorage.getItem("addcard_items") || "[]");
       addcard_items.push({ item_id: e.id, item_name: e.item_name, price: e.regular_price, qnt: 1 });
-      localStorage.setItem("users", JSON.stringify(addcard_items));
+      localStorage.setItem("addcard_items", JSON.stringify(addcard_items));
     } else {
       var mach = addcard_items.filter((dt) => {
         return dt.item_name.match(e.item_name)
