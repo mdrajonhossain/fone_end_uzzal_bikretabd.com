@@ -97,8 +97,7 @@ function Items({ match }) {
 
 
   const increment = (e) => {
-    console.log(e);
-
+    
     var item = JSON.parse(localStorage.getItem("item") || "[]");
     var index = item.findIndex(x => x.id === e);
     if (item[index].qnt != 10) {
